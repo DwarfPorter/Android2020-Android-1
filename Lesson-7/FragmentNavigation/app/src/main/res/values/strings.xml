@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Fragment Navigation</string>
+    <string name="main_screen">Main screen</string>
+    <string name="favorite_screen">Favorite screen</string>
+    <string name="replace">replace</string>
+    <string name="add">add</string>
+    <string name="new_fragment">New fragment:</string>
+    <string name="use_backstack">Use backstack</string>
+    <string name="settings">Settings</string>
+    <string name="favorite">Favorite</string>
+    <string name="main">Main</string>
+    <string name="back">Back</string>
+</resources>
