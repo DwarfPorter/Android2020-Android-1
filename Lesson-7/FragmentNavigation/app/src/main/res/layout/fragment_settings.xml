@@ -37,4 +37,27 @@
             android:text="@string/replace"
             android:textSize="@dimen/settings_dimen" />
     </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/editName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:text="@string/tag_name" />
+
+        <Button
+            android:id="@+id/buttonJump"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/jump" />
+
+    </LinearLayout>
+
 </LinearLayout>

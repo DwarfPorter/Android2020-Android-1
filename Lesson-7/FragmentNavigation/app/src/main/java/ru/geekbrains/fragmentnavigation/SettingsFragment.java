@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.RadioButton;
 
 import androidx.annotation.Nullable;
@@ -25,6 +27,7 @@ public class SettingsFragment extends Fragment {
         initSwitchBackStack(view);
         initRadioAdd(view);
         initRadioReplace(view);
+        initFragmentJump(view);
     }
 
     private void initRadioReplace(View view) {
@@ -58,6 +61,20 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Settings.isBackStack = isChecked;
+            }
+        });
+    }
+
+    // Перепрыгнуть на фрагмент по имени
+    private void initFragmentJump(View view) {
+        Button buttonJump = view.findViewById(R.id.buttonJump);
+        final EditText editName = view.findViewById(R.id.editName);
+        buttonJump.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = editName.getText().toString();
+                MainActivity activity = (MainActivity) requireActivity();
+                activity.jumpFragment(name);
             }
         });
     }

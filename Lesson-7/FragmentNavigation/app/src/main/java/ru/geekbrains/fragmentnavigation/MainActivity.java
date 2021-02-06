@@ -13,6 +13,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final static String TAG_MAIN = "main";
+    private final static String TAG_FAVORITE = "favorite";
+    private final static String TAG_SETTINGS = "settings";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addFragment(new SettingsFragment());
+                addFragment(new SettingsFragment(), TAG_SETTINGS);
             }
         });
     }
@@ -53,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         buttonFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addFragment(new FavoriteFragment());
+                addFragment(new FavoriteFragment(), TAG_FAVORITE);
             }
         });
     }
@@ -63,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         buttonMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addFragment(new MainFragment());
+                addFragment(new MainFragment(), TAG_MAIN);
             }
         });
     }
@@ -79,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
-    private void addFragment(Fragment fragment) {
+    private void addFragment(Fragment fragment, String name) {
 
         //Получить менеджер фрагментов
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -95,9 +99,9 @@ public class MainActivity extends AppCompatActivity {
             if (currentFragment != null) {
                 fragmentTransaction.remove(currentFragment);
             }
-            fragmentTransaction.add(R.id.fragment_container, fragment);
+            fragmentTransaction.add(R.id.fragment_container, fragment, name);
         } else {
-            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.replace(R.id.fragment_container, fragment, name);
         }
 
         // Добавить транзакцию в бэкстек
@@ -107,5 +111,24 @@ public class MainActivity extends AppCompatActivity {
 
         // Закрыть транзакцию
         fragmentTransaction.commit();
+    }
+
+    public boolean jumpFragment(String name) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentByTag(name);
+        if (fragment == null) {
+            return false;
+        }
+
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment, name);
+
+        // Добавить транзакцию в бэкстек
+        if (Settings.isBackStack) {
+            fragmentTransaction.addToBackStack(null);
+        }
+
+        fragmentTransaction.commit();
+        return true;
     }
 }

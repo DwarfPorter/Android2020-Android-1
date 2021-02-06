@@ -10,4 +10,6 @@
     <string name="favorite">Favorite</string>
     <string name="main">Main</string>
     <string name="back">Back</string>
+    <string name="jump">Jump</string>
+    <string name="tag_name">Tag name</string>
 </resources>
